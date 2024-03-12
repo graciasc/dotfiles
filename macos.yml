@@ -1,0 +1,45 @@
+- hosts: localhost
+  pre_tasks:
+    - name: Install Homebrew
+      shell: curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+  tasks:
+    - name: Update brew
+      shell: brew update && brew upgrade
+      tags:
+        - updates
+
+    - name: Install Node
+      homebrew:
+        name: ["nodejs", "npm"]
+
+    - name: Install lazygit
+      homebrew: name=lazygit
+
+    - name: Install Tmux
+      homebrew: name=tmux
+
+    - name: Install neovim
+      homebrew: name=neovim
+
+    - name: Install ripgrep
+      homebrew: name=ripgrep
+
+    - name: Install Hammerspoon
+      homebrew:
+        name: hammerspoon
+        state: present
+        install_options: cask
+
+    - name: Install docker
+      homebrew: name=docker
+
+    - name: Install git
+      homebrew: name=git
+
+    - name: Install personal nvim
+      ansible.builtin.git:
+        repo: "git@github.com:graciasc/nvim.git"
+        dest: "{{ ansible_env.HOME }}/.config/testing/nvim"
+        clone: yes
+        update: yes
+        key_file: "{{ ansible_env.HOME}}/.ssh/id_ed25519"
