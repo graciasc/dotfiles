@@ -64,7 +64,8 @@
 
     - name: Install personal nvim
       ansible.builtin.git:
-        repo: "https://git@github.com:graciasc/nvim.git"
-        dest: "~.config"
-        clone: true
-        update: true
+        repo: "git@github.com:graciasc/nvim.git"
+        dest: "{{ ansible_env.HOME }}/.config/nvim"
+        clone: yes
+        update: yes
+        key_file: "{{ ansible_env.HOME}}/.ssh/id_ed25519"

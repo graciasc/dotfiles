@@ -8,9 +8,29 @@
       tags:
         - updates
 
+    - name: Install zsh
+      homebrew: name=zsh
+
     - name: Install Node
       homebrew:
         name: ["nodejs", "npm"]
+
+    - name: Install ohmyzsh
+      shell: curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+      tags:
+        - zsh
+
+    - name: Change shells
+      shell: chsh
+      tags:
+      - zsh
+
+    - name: Install autosuggestions
+      ansible.builtin.git:
+        repo: https://github.com/zsh-users/zsh-autosuggestions.git
+        dest: ~/.oh-my-zsh/plugins/zsh-autosuggestions
+      tags:
+        - zsh
 
     - name: Install lazygit
       homebrew: name=lazygit
@@ -39,7 +59,7 @@
     - name: Install personal nvim
       ansible.builtin.git:
         repo: "git@github.com:graciasc/nvim.git"
-        dest: "{{ ansible_env.HOME }}/.config/testing/nvim"
+        dest: "{{ ansible_env.HOME }}/.config/nvim"
         clone: yes
         update: yes
         key_file: "{{ ansible_env.HOME}}/.ssh/id_ed25519"
