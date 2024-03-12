@@ -1,0 +1,14 @@
+- name: Install autosuggestions
+  ansible.builtin.git:
+    repo: https://github.com/zsh-users/zsh-autosuggestions.git
+    dest: ~/.oh-my-zsh/plugins/zsh-autosuggestions
+  tags:
+    - zsh
+
+- name: Install personal nvim
+  ansible.builtin.git:
+    repo: "git@github.com:graciasc/nvim.git"
+    dest: "{{ ansible_env.HOME }}/.config/nvim"
+    clone: yes
+    update: yes
+    key_file: "{{ ansible_env.HOME}}/.ssh/id_ed25519"

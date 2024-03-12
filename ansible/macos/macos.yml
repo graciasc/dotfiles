@@ -1,0 +1,7 @@
+- hosts: localhost
+  pre_tasks:
+    - name: Install Homebrew
+      shell: curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+  tasks:
+  - import_tasks: ./homebrew.yml
+  - import_tasks: ./git.yml

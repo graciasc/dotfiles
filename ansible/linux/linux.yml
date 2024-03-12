@@ -1,0 +1,16 @@
+- hosts: localhost
+  pre_tasks:
+    - name: Update apt
+      shell: apt-get update
+      tags:
+        - zsh
+        - node
+    - name: Install curl
+      apt: name=curl
+      tags:
+        - zsh
+        - node
+
+  tasks:
+    - import_tasks: ./git.yml
+    - import_tasks: ./apt.yml
