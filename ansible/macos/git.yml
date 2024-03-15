@@ -12,3 +12,11 @@
     clone: yes
     update: yes
     key_file: "{{ ansible_env.HOME}}/.ssh/id_ed25519"
+
+- name: Install dotfiles
+  ansible.builtin.git:
+    repo: "git@github.com:graciasc/dotfiles.git"
+    dest: "{{ ansible_env.HOME }}"
+    clone: yes
+    update: yes
+    key_file: "{{ ansible_env.HOME}}/.ssh/id_ed25519"

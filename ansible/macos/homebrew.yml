@@ -37,6 +37,27 @@
     state: present
     install_options: cask
 
+- name: Tap koekeishiya/formulae
+  homebrew_tap:
+    name: koekeishiya/formulae
+    state: present
+
+- name: Install Skhd
+  homebrew:
+    name: koekeishiya/formulae/skhd
+    state: present
+
+- name: Install Yabai
+  homebrew:
+    name: koekeishiya/formulae/yabai
+    state: present
+
+- name: Install Nerd Font
+  homebrew:
+    name: font-hack-nerd-font
+    state: present
+    install_options: cask
+
 - name: Install docker
   homebrew: name=docker
 
