@@ -58,8 +58,22 @@
     state: present
     install_options: cask
 
+- name: Install sf-symbol
+  homebrew:
+    name: sf-symbol
+    install_options: cask
+
 - name: Install docker
   homebrew: name=docker
 
 - name: Install git
   homebrew: name=git
+
+- name: Install flyctl
+  homebrew: name=flyctl
+
+- name: Install FZF
+  homebrew: name=fzf
+
+- name: Install Neovim
+  homebrew: name=neovim
