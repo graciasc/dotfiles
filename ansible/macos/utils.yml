@@ -1,0 +1,14 @@
+- name: Install ripgrep
+  homebrew: name="ripgrep"
+  tags:
+  - utils
+
+- name: Install jq
+  homebrew: name="jq"
+  tags:
+  - utils
+
+- name: Install zoxide
+  homebrew: name="zoxide"
+  tags:
+  - utils
