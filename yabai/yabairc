@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
+# for this to work you must configure sudo such that
+# it will be able to run the command without password
 
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+sudo yabai --load-sa
+
+# .. more yabai startup stuff
 # set -x
 #
 # # ====== Variables =============================
@@ -127,17 +133,3 @@ yabai -m signal --add event=window_destroyed action="sketchybar --trigger window
 
 # opens a new space or moves to a created space already
 # yabai -m space --create && index="$(yabai -m query --spaces --display | jq 'map(select(."is-native-fullscreen" == false))[-1].index')" && yabai -m window --space "${index}" && yabai -m space --focus "${index}"
-#
-# navigate between spaces
-
-# borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=5.0 &
-# yabai -m space 1 --label 'I'
-# yabai -m space 2 --label 'II'
-# yabai -m space 3 --label 'III'
-# yabai -m space 4 --label 'IV'
-# yabai -m space 5 --label 'V'
-# yabai -m space 6 --label 'VI'
-# yabai -m space 7 --label 'VII'
-# yabai -m space 8 --label 'VIII'
-# yabai -m space 9 --label 'IX'
-# yabai -m space 10 --label 'X'

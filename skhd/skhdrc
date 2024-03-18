@@ -203,7 +203,10 @@ shift + alt - g : yabai -m window --display east; yabai -m display --focus east;
 shift + alt - p : yabai -m window --space prev;
 shift + alt - n : yabai -m window --space next;
 
-# move window to space #
+ctrl - 1 : yabai -m space --focus 1; sleep 0.5; yabai -m window --focus first 
+ctrl - 2 : yabai -m space --focus 2; sleep 0.5; yabai -m window --focus first 
+ctrl - 3 : yabai -m space --focus 3; sleep 0.5; yabai -m window --focus first
+ move window to space #
 shift + alt - 1 : yabai -m window --space 1;
 shift + alt - 2 : yabai -m window --space 2;
 shift + alt - 3 : yabai -m window --space 3;
@@ -215,27 +218,27 @@ shift + alt - 7 : yabai -m window --space 7;
 
 # move between spaces on display
 # shift + alt - 1 : yabai -m space --focus 1
-cmd - 2 : yabai -m space --focus 2
-cmd - 3 : yabai -m space --focus 3
-cmd - 4 : yabai -m focus --space 4
-cmd - 5 : yabai -m space --focus 5
-cmd - 6 : yabai -m space --focus 6
-cmd - 7 : yabai -m space --focus 7
-cmd - 8 : yabai -m space --focus 8
-cmd - 9 : yabai -m space --focus 9
-cmd - 0 : yabai -m space --focus 10
+# cmd - 2 : yabai -m space --focus 2
+# cmd - 3 : yabai -m space --focus 3
+# cmd - 4 : yabai -m focus --space 4
+# cmd - 5 : yabai -m space --focus 5
+# cmd - 6 : yabai -m space --focus 6
+# cmd - 7 : yabai -m space --focus 7
+# cmd - 8 : yabai -m space --focus 8
+# cmd - 9 : yabai -m space --focus 9
+# cmd - 0 : yabai -m space --focus 10
 # move between spaces 
 # alt - z : yabai -m space --focus 1
 #
 # Space Navigation (four spaces per display): lalt - {1, 2, 3, 4}
-alt - 1 : DISPLAY="$(yabai -m query --displays --display | jq '.index')"; yabai -m space --focus $((1+4*($DISPLAY - 1)))
-alt - 2 : DISPLAY="$(yabai -m query --displays --display | jq '.index')"; yabai -m space --focus $((2+4*($DISPLAY - 1)))
-alt - 3 : DISPLAY="$(yabai -m query --displays --display | jq '.index')"; yabai -m space --focus $((3+4*($DISPLAY - 1)))
-alt - 4 : DISPLAY="$(yabai -m query --displays --display | jq '.index')"; yabai -m space --focus $((4+4*($DISPLAY - 1)))
+# alt - 1 : DISPLAY="$(yabai -m query --displays --display | jq '.index')"; yabai -m space --focus $((1+4*($DISPLAY - 1)))
+# alt - 2 : DISPLAY="$(yabai -m query --displays --display | jq '.index')"; yabai -m space --focus $((2+4*($DISPLAY - 1)))
+# alt - 3 : DISPLAY="$(yabai -m query --displays --display | jq '.index')"; yabai -m space --focus $((3+4*($DISPLAY - 1)))
+# alt - 4 : DISPLAY="$(yabai -m query --displays --display | jq '.index')"; yabai -m space --focus $((4+4*($DISPLAY - 1)))
 
 # -- Starting/Stopping/Restarting Yabai --
 
 # stop/start/restart yabai
-ctrl + alt - q : brew services stop yabai
-ctrl + alt - r : brew services restart yabai
-ctrl + alt - s : brew services start yabai
+alt - q : brew services stop yabai
+alt - r : brew services restart yabai
+alt - s : brew services start yabai

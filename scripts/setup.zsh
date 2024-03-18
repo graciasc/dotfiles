@@ -54,3 +54,16 @@
 # brew install switchaudio-osx
 # brew install lazygit
 # brew install btop
+#
+#
+# TODO: TO get spaces to work in skhd and yabai 
+#
+#follow: https://github.com/koekeishiya/yabai/wiki/Installing-yabai-(latest-release)#configure-scripting-addition
+#issue: https://github.com/koekeishiya/yabai/issues/1158
+#commands: sudo nvram boot-args=-arm64e_preview_abi
+# reboot
+# sudo yabai --uninstall-sa
+# sudo yabai --install-sa
+# sudo yabai --load-sa
+# TLDR: set up the `csrutils disable` in recovery mode
+# 
