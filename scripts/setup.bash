@@ -1,21 +1,56 @@
 #!usr/bin/env zsh
 
+# add stow path from file (dotfiles)
+# INFO: stow -t ~/.config dotfiles from ~(root)
+dotfiles_path='~/.config dotfiles'
 
-# add stow path from file (dotfiles) 
-# TODO: stow -t ~/.config dotfiles from ~(root)
 # # add symlink for .hammerspoon
-# TODO:  ln -s ~/.dotfiles/.hammerspoon from ~(root)
+# INFO:  ln -s ~/.dotfiles/.hammerspoon from ~(root)
+hammerspoon_path= ~/.dotfiles/.hammerspoon
+
 # # add bin files for homebrew for macos
-# TODO:  eval "$(/opt/homebrew/bin/brew shellenv)"
+# INFO:  eval "$(/opt/homebrew/bin/brew shellenv)"
 # echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+extract_homebrew_bin() {
+	echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >>~/.zprofile
+}
 # add tmux file using the ~/.config dir
-# add this for sketchybar-app-fonts to work
-# TODO: 
+
+# INFO: add this for sketchybar-app-fonts to work
 # Installing Fonts
 # git clone git@github.com:shaunsingh/SFMono-Nerd-Font-Ligaturized.git /tmp/SFMono_Nerd_Font
 # mv /tmp/SFMono_Nerd_Font/* $HOME/Library/Fonts
 # rm -rf /tmp/SFMono_Nerd_Font/
 # curl -L https://github.com/kvndrsslr/sketchybar-app-font/releases/download/v1.0.4/sketchybar-app-font.ttf -o $HOME/Library/Fonts/sketchybar-app-font.ttf
+setup_sketchybar() {
+	# Clone the SFMono Nerd Font repository
+	if [ -d "/tmp/SFMono_Nerd_Font" ]; then
+		rm -rf /tmp/SFMono_Nerd_Font
+	fi
+	git clone git@github.com:shaunsingh/SFMono-Nerd-Font-Ligaturized.git /tmp/SFMono_Nerd_Font
+
+	if [ $? -ne 0 ]; then
+		echo "Error cloning SFMono Nerd Font repository."
+
+    # Exit the function with an error status
+		return 1 
+
+	# Move the cloned fonts to the user's Library/Fonts directory
+	mv "/tmp/SFMono_Nerd_Font/"* "$HOME/Library/Fonts/"
+	if [ $? -ne 0 ]; then
+		echo "Error moving SFMono Nerd Font files."
+		return 1
+	fi
+	rm -rf /tmp/SFMono_Nerd_Font/
+
+	# Download the SketchyBar app font
+	curl -L https://github.com/kvndrsslr/sketchybar-app-font/releases/download/v1.0.4/sketchybar-app-font.ttf -o "$HOME/Library/Fonts/sketchybar-app-font.ttf"
+	if [ $? -ne 0 ]; then
+		echo "Error downloading SketchyBar app font."
+		return 1
+	fi
+}
+# TODO:
 # TODO:  tmux source ~/.config/tmux/tmux.conf
 # TODO: # Brew Formulae
 # brew install gsl
@@ -56,7 +91,7 @@
 # brew install btop
 #
 #
-# TODO: TO get spaces to work in skhd and yabai 
+# TODO: TO get spaces to work in skhd and yabai
 #
 #follow: https://github.com/koekeishiya/yabai/wiki/Installing-yabai-(latest-release)#configure-scripting-addition
 #issue: https://github.com/koekeishiya/yabai/issues/1158
@@ -65,5 +100,14 @@
 # sudo yabai --uninstall-sa
 # sudo yabai --install-sa
 # sudo yabai --load-sa
-# TLDR: set up the `csrutils disable` in recovery mode
-# 
+# TLDR: set up the csrutils disable in recovery mode
+#
+
+run_setup() {
+	echo "Running the setup script"
+
+	"ln -s $hammerspoon_path" "$(basename $hammerspoon_path)"
+	"stow -t $dotfiles_path"
+}
+
+run_setup
