@@ -1,4 +1,5 @@
 #!usr/bin/env zsh
+# experiment with zx scripting tool
 # INFO: # Brew Formulae
 # brew install gsl
 # brew install llvm
