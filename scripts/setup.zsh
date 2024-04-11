@@ -51,7 +51,7 @@ hammerspoon_path='~/dotfiles/.hammerspoon'
 # INFO:  eval "$(/opt/homebrew/bin/brew shellenv)"
 # echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
 extract_homebrew_bin() {
-	echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >>~/.zprofile
+    echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
 }
 
 # add tmux file using the ~/.config dir
@@ -110,6 +110,7 @@ run_setup() {
 	cd "$HOME"
 	stow -t "$HOME/.config" -d "$HOME/dotfiles" '.config'
 	stow -t "$HOME" -d "$HOME/dotfiles" 'hammerspoon'
+	stow -t "$HOME" -d "$HOME/dotfiles" 'gitconfig'
 
 	if [[ $? -ne 0 ]]; then
 		echo "Error stowing dotfiles"
@@ -126,6 +127,6 @@ run_setup() {
 
 	echo "Run ctrl + t + I to install tpm plugins"
 }
-run_setup
 #INFO: run the functions
-extract_homebrew_bin() # setup_sketchybar
+run_setup
+extract_homebrew_bin # setup_sketchybar
