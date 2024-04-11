@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 #TODO: This will be a script for handling tmux sessions and windows
 
 session=$(find ~ ~/code -mindepth 1 -maxdepth 1 -type d | fzf)
