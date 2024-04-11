@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 #TODO: This will be a script for handling tmux sessions and windows
 
-session=$(find ~ ~/code -mindepth 1 -maxdepth 1 -type d | fzf)
+session=$(find ~ ~/code ~/adobe -mindepth 1 -maxdepth 1 -type d | fzf)
 session_name="$(basename $session | tr . " ")"
 
 if ! tmux has-session -t "$session_name" 2>/dev/null; then

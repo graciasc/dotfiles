@@ -127,6 +127,9 @@ alias k="kubectl"
  # event-consumer (running a kafka pipeline)
  alias event-consumer="docker exec -it docker-kafka-1 kafka-console-producer.sh --broker-list kafka:9092 --topic outbox
 "
-# clean swap file
-alias clean-swp="rm -r ~/.local/state/nvim/swap/*"
+#zshrc
+alias zshrc-source="source ~/.zshrc"
 
+# tmux
+alias tmuxi="~/dotfiles/scripts/tmuxi.zsh"
+alias tmux-source="tmux source ~/.config/tmux/tmux.conf"

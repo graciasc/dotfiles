@@ -127,6 +127,7 @@ run_setup() {
 
 	echo "Run ctrl + t + I to install tpm plugins"
 }
+
 #INFO: run the functions
 run_setup
 extract_homebrew_bin # setup_sketchybar
