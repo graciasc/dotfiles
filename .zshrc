@@ -129,4 +129,5 @@ alias k="kubectl"
 "
 # clean swap file
 alias clean-swp="rm -r ~/.local/state/nvim/swap/*"
+alias tmuxi="~/dotfiles/tmux-sessionizer.zsh"
 
