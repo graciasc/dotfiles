@@ -121,7 +121,7 @@ alias k="kubectl"
 # helm
  alias h="helm"
 
- # mfe's  using yalc
+ # mfe's using yalc
  alias publish="yarn build:dev && yalc publish --push"
 
  # event-consumer (running a kafka pipeline)

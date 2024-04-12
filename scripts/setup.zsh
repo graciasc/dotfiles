@@ -1,49 +1,7 @@
 #!/usr/bin/env zsh
-# experiment with zx scripting tool
-# INFO: # Brew Formulae
-# brew install gsl
-# brew install llvm
-# brew install ccls
-# brew install boost
-# brew install libomp
-# brew install armadillo
-# brew install mas
-# brew install neovim
-# brew install tree
-# brew install wget
-# brew install jq
-# brew install gh
-# brew install ripgrep
-# brew install rename
-# brew install bear
-# brew install neofetch
-# brew install wireguard-go
-# brew install gnuplot
-# brew install lulu
-# brew install ifstat
-# brew install hdf5
-# brew install mactex
-# brew install starship
-# brew install dooit
-# brew install alfred
-# brew install zsh-autosuggestions
-# brew install zsh-syntax-highlighting
-# brew install skhd
-# brew install fyabai --head
-# brew install fnnn --head
-# brew install sketchybar
-# brew install svim
-# brew install sf-symbols
-# brew install switchaudio-osx
-# brew install lazygit
-# brew install btop
-
 # INFO: stow -t ~/.config dotfiles from ~(root)
 # add stow path from file (dotfiles)
-# make this more dyanmic
-dotfiles_from="$HOME/dotfiles"
 # # add symlink for .hammerspoon
-dotfiles_to="$HOME/.config"
 # INFO:  ln -s ~/dotfiles/.hammerspoon from ~(root)
 hammerspoon_path='~/dotfiles/.hammerspoon'
 
@@ -54,6 +12,7 @@ extract_homebrew_bin() {
     echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
 }
 
+environment=$1
 # add tmux file using the ~/.config dir
 # INFO: add this for sketchybar-app-fonts to work
 # Installing Fonts
@@ -61,37 +20,39 @@ extract_homebrew_bin() {
 # mv /tmp/SFMono_Nerd_Font/* $HOME/Library/Fonts
 # rm -rf /tmp/SFMono_Nerd_Font/
 # curl -L https://github.com/kvndrsslr/sketchybar-app-font/releases/download/v1.0.4/sketchybar-app-font.ttf -o $HOME/Library/Fonts/sketchybar-app-font.ttf
-# setup_sketchybar() {
-# 	# Clone the SFMono Nerd Font repository
-# 	if [ -d "/tmp/SFMono_Nerd_Font" ]; then
-# 		rm -rf /tmp/SFMono_Nerd_Font
-# 	fi
-# 	git clone git@github.com:shaunsingh/SFMono-Nerd-Font-Ligaturized.git /tmp/SFMono_Nerd_Font
-#
-# 	if [ $? -ne 0 ]; then
-# 		echo "Error cloning SFMono Nerd Font repository."
-#
-#     # Exit the function with an error status
-# 		return 1
-#
-# 	# Move the cloned fonts to the user's Library/Fonts directory
-# 	mv "/tmp/SFMono_Nerd_Font/"* "$HOME/Library/Fonts/"
-# 	if [ $? -ne 0 ]; then
-# 		echo "Error moving SFMono Nerd Font files."
-# 		return 1
-# 	fi
-# 	rm -rf /tmp/SFMono_Nerd_Font/
-#
-# 	# Download the SketchyBar app font
-# 	curl -L https://github.com/kvndrsslr/sketchybar-app-font/releases/download/v1.0.4/sketchybar-app-font.ttf -o "$HOME/Library/Fonts/sketchybar-app-font.ttf"
-# 	if [ $? -ne 0 ]; then
-# 		echo "Error downloading SketchyBar app font."
-# 		return 1
-# 	fi
-# }
+setup_sketchybar() {
+	# Clone the SFMono Nerd Font repository
+
+    if [ [ -d "/tmp/SFMono_Nerd_Font" ] ]; then
+      rm -rf /tmp/SFMono_Nerd_Font
+    fi
+
+    git clone git@github.com:shaunsingh/SFMono-Nerd-Font-Ligaturized.git /tmp/SFMono_Nerd_Font
+
+    if [ [ $? -ne 0 ] ]; then
+      echo "Error cloning SFMono Nerd Font repository."
+
+    return 1
+    fi
+
+  # Move the cloned fonts to the user's Library/Fonts directory
+  mv "/tmp/SFMono_Nerd_Font/"* "$HOME/Library/Fonts/"
+  if [ [  $? -ne 0 ] ]; then
+    echo "Error moving SFMono Nerd Font files."
+    return 1
+  fi
+  rm -rf /tmp/SFMono_Nerd_Font/
+
+  # Download the SketchyBar app font
+  curl -L https://github.com/kvndrsslr/sketchybar-app-font/releases/download/v1.0.4/sketchybar-app-font.ttf -o "$HOME/Library/Fonts/sketchybar-app-font.ttf"
+  if [ $? -ne 0 ]; then
+    echo "Error downloading SketchyBar app font."
+    return 1
+  fi
+}
 
 # TODO:  tmux source ~/.config/tmux/tmux.conf
-tmux_path="$HOME/.config/tmux/tmux.conf"
+# tmux_path="$HOME/.config/tmux/tmux.conf"
 
 # WARNING: TO get spaces to work in skhd and yabai
 #follow: https://github.com/koekeishiya/yabai/wiki/Installing-yabai-(latest-release)#configure-scripting-addition
@@ -104,30 +65,48 @@ tmux_path="$HOME/.config/tmux/tmux.conf"
 # set up the csrutils disable in recovery mode
 
 run_setup() {
-	echo "Running the setup script"
+	echo "Running the setup script\n"
 
 	#INFO: change to root directory
 	cd "$HOME"
 	stow -t "$HOME/.config" -d "$HOME/dotfiles" '.config'
 	stow -t "$HOME" -d "$HOME/dotfiles" 'hammerspoon'
-	stow -t "$HOME" -d "$HOME/dotfiles" 'gitconfig'
+
+  if [[ $environment == '-p' ]]; then 
+    echo "Stowing zshrc\n"
+    stow -t "$HOME" -d "$HOME/dotfiles" 'gitconfig'
+    stow -t "$HOME" -d "$HOME/dotfiles" 'zshrc'
+  fi
 
 	if [[ $? -ne 0 ]]; then
-		echo "Error stowing dotfiles"
+		echo "Error stowing dotfiles ❌\n"
 		return 1
 	fi
 	echo "finished stowing"
 
-	tmux source "${tmux_path}"
+  tmux-source
+  echo "$?"
 
 	if [[ $? -ne 0 ]]; then
-		echo "Error sourcing tmux"
-		return 1
+		echo "Error sourcing tmux ❌\n"
 	fi
+
+    echo "Cloning tpm for tmux plugins 🚀 \n"
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+    if [[ $? -ne 0 ]]; then
+      echo "Error cloning tpm for tmux plugins ❌\n 
+TPM may already exists 🌳"
+      return 1
+    fi
 
 	echo "Run ctrl + t + I to install tpm plugins"
 }
 
 #INFO: run the functions
 run_setup
-extract_homebrew_bin # setup_sketchybar
+extract_homebrew_bin 
+
+if [[ $environment == '-p' ]]; then 
+  setup_sketchybar
+fi
