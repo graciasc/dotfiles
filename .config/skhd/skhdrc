@@ -89,7 +89,7 @@
 # shift + alt - 0 : yabai -m space --balance
 
 # make floating window fill screen
-shift + alt - up     : yabai -m window --grid 1:1:0:0:1:1
+ctrl + alt - up     : yabai -m window --grid 1:1:0:0:1:1
 
 # make floating window fill left-half of screen
 # shift + alt - left   : yabai -m window --grid 1:2:0:0:1:1
@@ -121,12 +121,12 @@ shift + alt - up     : yabai -m window --grid 1:1:0:0:1:1
 # shift + ctrl - s : yabai -m window --move rel:0:20
 
 # increase window size
-# shift + alt - a : yabai -m window --resize left:-20:0
-# shift + alt - w : yabai -m window --resize top:0:-20
+shift + alt - a : yabai -m window --resize left:-20:0
+shift + alt - w : yabai -m window --resize top:0:-20
 
 # decrease window size
-# shift + cmd - s : yabai -m window --resize bottom:0:-20
-# shift + cmd - w : yabai -m window --resize top:0:20
+shift + cmd - s : yabai -m window --resize bottom:0:-20
+shift + cmd - w : yabai -m window --resize top:0:20
 
 # set insertion point in focused container
 # ctrl + alt - h : yabai -m window --insert west
@@ -183,10 +183,10 @@ shift + alt - e : yabai -m space --balance
 # -- Moving Windows Around --
 
 # swap windows
-shift + alt - j : yabai -m window --swap south
-shift + alt - k : yabai -m window --swap north
-shift + alt - h : yabai -m window --swap west
-shift + alt - l : yabai -m window --swap east
+# shift + alt - j : yabai -m window --swap south
+# shift + alt - k : yabai -m window --swap north
+# shift + alt - h : yabai -m window --swap west
+# shift + alt - l : yabai -m window --swap east
 
 # move window and split
 ctrl + alt - j : yabai -m window --warp south
@@ -200,8 +200,9 @@ shift + alt - g : yabai -m window --display east; yabai -m display --focus east;
 
 
 # move window to prev and next space
-shift + alt - p : yabai -m window --space prev;
-shift + alt - n : yabai -m window --space next;
+# shift + alt - p : yabai -m window --space prev;
+# shift + alt - n : yabai -m window --space next;
+ctrl + alt - o : yabai -m space --focus recent;
 
 ctrl - 1 : yabai -m space --focus 1; sleep 0.5; yabai -m window --focus first;
 ctrl - 2 : yabai -m space --focus 2; sleep 0.5; yabai -m window --focus first;
@@ -230,6 +231,7 @@ shift + alt - 7 : yabai -m window --space 7;
 # cmd - 8 : yabai -m space --focus 8
 # cmd - 9 : yabai -m space --focus 9
 # cmd - 0 : yabai -m space --focus 10
+
 # move between spaces 
 # alt - z : yabai -m space --focus 1
 #
@@ -240,7 +242,6 @@ shift + alt - 7 : yabai -m window --space 7;
 # alt - 4 : DISPLAY="$(yabai -m query --displays --display | jq '.index')"; yabai -m space --focus $((4+4*($DISPLAY - 1)))
 
 # -- Starting/Stopping/Restarting Yabai --
-
 # stop/start/restart yabai
 alt - q : brew services stop yabai
 alt - r : brew services restart yabai
