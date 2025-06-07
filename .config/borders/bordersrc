@@ -9,3 +9,5 @@ options=(
 )
 
 borders "${options[@]}"
+
+function name (name, trait) {:}
